@@ -1,0 +1,72 @@
+{% extends "base.html" %} {% block title %}Should I put the washing out?{%
+endblock %}
+{%block content %}
+
+<div class="spacer pt-6"></div>
+
+<div class="columns is-centered pt-6">
+  <div class="column is-half">
+
+    <section class="section ">
+
+      <h1 class="title has-text-centered">
+        Should you put your washing out?
+      </h1>
+    </section>
+
+    <section class="section" id="searchBox">
+      <div class="container">
+        <form id="formId" action="formBlocker()" method="post">
+          <div class="field pb-3">
+            <label class="label">Enter your postcode</label>
+            <div class="control">
+              <input class="input has-text-centered" type="text" placeholder="postcode" name="postcode">
+            </div>
+          </div>
+        </form>
+        <div class="field">
+          <div class="columns is-centered">
+            <div class="column is-half has-text-centered">
+              <div class="container">
+                <button class="button is-success has-text-centered" role="button" onclick="ShouldIPutMyWashingOut()">
+                  Find out!
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <div class="columns  is-multiline is-centered" id="testBox">
+
+    </div>
+
+    <div class="container">
+      <img class="loadSpinner" id="loadSpinner" src="/static/images/loading.png" alt="load spinner" />
+    </div>
+
+    <section id="result" class="has-text-centered">
+
+      <div class="container box block has-text-centered">
+        <p class="heading">Should you put your washing out?</p>
+        <p id="resultCardContent" class="title">Yes/No</p>
+        <p id="resultTime" class="title"> It will take approximately 3 hours to dry</p>
+      </div>
+      <button class="button is-info has-text-centered collapsible">
+        Show more information
+      </button>
+      <div class="collapsibleContent">
+        <nav class="columns  is-multiline is-centered" id="InfoBox">
+          <!-- This section is filled dynamically as weather is pulled -->
+        </nav>
+
+      </div>
+    </section>
+
+  </div>
+</div>
+
+{% endblock %}

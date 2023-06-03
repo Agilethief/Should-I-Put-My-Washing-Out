@@ -1,0 +1,109 @@
+.loadContainerSpinner {
+  display: block;
+  position: relative;
+  height: 40px;
+  width: auto;
+  margin-left: 50%;
+  top: 1em;
+  animation-name: loadSpin;
+  animation-duration: 0.9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.75, 0.25, 0.5, 0.75);
+}
+.loadSpinner {
+  display: block;
+  position: absolute;
+  width: 80px;
+  min-height: 80px;
+  top: 11em;
+  left: 45%;
+  padding: 1em;
+  animation-name: loadSpin;
+  animation-duration: 0.9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.75, 0.25, 0.5, 0.75);
+}
+@keyframes loadSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fadein {
+  animation-name: fadein;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.75, 0.25, 0.5, 0.75);
+}
+.fadeout {
+  animation-name: fadeout;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-timing-function: cubic-bezier(0.75, 0.25, 0.5, 0.75);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  cursor: pointer;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.collapsibleContent {
+  display: none;
+  /*overflow: hidden; */
+}
+
+.hidden {
+  display: none;
+}
+
+.imgIcon {
+  width: 10%;
+  height: 10%;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0.25em;
+  left: 0;
+  width: 100%;
+  height: 1em;
+  background-color: rgb(226, 226, 226) 0 4px 9px;
+  box-shadow: rgba(165, 167, 166, 0.15) 0 4px 9px;
+  display: flex;
+  flex-direction: row;
+  align-content: end;
+  text-align: right;
+  padding: 1.5em;
+}
+.footer-text {
+  display: block;
+  margin-right: 2em;
+  color: rgb(155, 155, 155);
+  text-align: right;
+  width: 100%;
+  font-family: inherit;
+  font-size: 70%;
+  font-weight: inherit;
+}
