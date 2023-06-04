@@ -16,16 +16,69 @@
 
   <div class="bgGrad"></div>
   <div class="bgGround"></div>
-  <div class="bgItems">
-    <img class="bgImage bgSun" src="/static/images/WeatherIcons/BlackIcon/003-sun.png">
+  <div class="bgItems" id="bgItems">
+    <div id="bgSun"></div>
+    <!--
     <img class="bgImage bgCloud" src="/static/images/WeatherIcons/BlackIcon/009-clouds.png">
     <img class="bgImage bgTree" src="/static/images/WeatherIcons/BlackIcon/021-tree.png">
+    -->
+  </div>
+
+  <div id="menu">
+    <div class="navbar-weather" role="navigation" aria-label="main navigation">
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <a href="/" class="image is-square is-32x32">
+              <img class="" src="/static/images/WeatherIcons/FlatIcon/001-sun.png ">
+            </a>
+          </div>
+        </div>
+        <div class="level-right">
+
+          <div class="level-item">
+            <a href="/" class="button is-small is-success">
+              Postcode
+            </a>
+          </div>
+
+          <div class="level-item">
+            <a href="/global" class="button is-small is-success">
+              Global
+            </a>
+          </div>
+          <div class="level-item">
+            <a href="/method" class="button is-small is-success">
+              Method
+            </a>
+          </div>
+          <div class="level-item">
+            <a href="/about" class="button is-small is-success">
+              About
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
 
   <div class="wrapper mainContent">{% block content %} {% endblock %}</div>
-  <div class="footer">
-    <div class="footer-text">Created and maintained by Timothy Bermanseder</div>
+
+
+  <div class="footerContainer">
+    <div class="level">
+      <div class="level-left">
+        <div class="footer-text">Weather data provided by <a href="https://open-meteo.com"
+            target="_blank">Open-Meteo</a>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="footer-text">Created and maintained by Timothy Bermanseder</div>
+      </div>
+    </div>
   </div>
 
   <script src="/static/js/weather.js"></script>

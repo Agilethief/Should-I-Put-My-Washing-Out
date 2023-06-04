@@ -19,6 +19,15 @@ endblock %}
         <form id="formId" class="pb-3">
           <div class="field">
             <label class="label">Enter your postcode</label>
+            <div class="columns is-centered">
+              <div class="column is-half has-text-centered">
+                <div class="container">
+                  <button class="button is-success has-text-centered" role="button" onclick="GetGeoLocation()">
+                    Or use your location
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="control">
               <input class="input is-large has-text-centered" type="text" placeholder="Enter your Postcode"
                 name="postcode" maxlength="10">

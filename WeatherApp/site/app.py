@@ -10,15 +10,30 @@ app = Flask(__name__)
 def home():
     if request.method == "POST":
         print("POST")
-        return redirect(url_for("templatetest"))
+        return redirect(url_for("postcodePage"))
     else:
         print("GET")
-        return render_template("ShouldI.html")
+        return render_template("postcode.html")
 
 
-@app.route("/TemplateTest/")
-def templatetest():
-    return render_template("ShouldI.html")
+@app.route("/postcode/")
+def postcodePage():
+    return render_template("postcode.html")
+
+
+@app.route("/global/")
+def globalPage():
+    return render_template("global.html")
+
+
+@app.route("/method/")
+def methodPage():
+    return render_template("method.html")
+
+
+@app.route("/about/")
+def aboutPage():
+    return render_template("about.html")
 
 
 @app.route('/CheckWeather', methods=['POST'])
@@ -28,8 +43,28 @@ def CheckWeather():
     print(requestData)
     # Validate and add user to data base here
     postcode = requestData['postcode']
+    long = requestData['long']
+    lat = requestData['lat']
 
-    weatherData = weatherProgram.call_ShouldIPutMyWashingOut(postcode)
+    print("postcode: " + postcode)
+    print("long: " + long)
+    print("lat: " + lat)
+
+    if (postcode != ""):
+        print("Searching via postcode")
+        weatherData = weatherProgram.call_ShouldIPutMyWashingOut(postcode)
+    else:
+        print("Searching via longlat")
+        weatherData = weatherProgram.call_ShouldIPutMyWashingOutLongLat(
+            long, lat)
+
+    # make sure weather data exists
+    if (weatherData == None):
+        return {
+            "reason": "No weather data found",
+            "pass": "failed",
+        }
+
     print(weatherData)
     if weatherData["result"] == False:
         return {

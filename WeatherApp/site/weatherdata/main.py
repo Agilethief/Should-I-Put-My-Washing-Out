@@ -1,5 +1,6 @@
 from . import postcodeConversion  # import CreateDatabase, PostCodeToLongLat
 from . import weather  # import GetWeatherData
+from . import report
 import json
 from datetime import datetime, time, timedelta
 from zoneinfo import ZoneInfo
@@ -38,6 +39,15 @@ def GetWeatherFromPostcode(postcode):
 
     with open("weatherdata/TestOutput/weatherdata.json", "w") as outfile:
         outfile.write(str(weatherdata))
+
+    return weatherdata
+
+
+def GetWeatherFromLongLat(long, lat):
+    longlat = (long, lat)
+    print("Getting weather data...")
+    weatherdata = weather.GetWeatherData(longlat)
+    weatherdata = json.loads(weatherdata)
 
     return weatherdata
 
@@ -177,15 +187,25 @@ def TimeToSunchange(weatherdata):
     currentTime = datetime.now().time().strftime('%H:%M')
     currentTime = datetime.strptime(currentTime, "%H:%M")
 
-    if (currentTime < sunrise):
-        timeToSunChange = sunrise - currentTime
-    elif (currentTime < sunset):
+    if (currentTime < sunset):
+        print("It is before sunset")
         timeToSunChange = sunset - currentTime
+    elif (currentTime < sunrise):
+        print("It is before sunrise")
+        timeToSunChange = sunrise - currentTime
     else:
+        print("It is after sunset")
         timeToSunChange = sunrise - currentTime
 
     hours = timeToSunChange.seconds // 3600
     minutes = (timeToSunChange.seconds // 60) % 60
+
+    print("=== Time to sun change ===")
+    print("Current time: ", currentTime)
+    print("Sunrise: ", sunrise)
+    print("Sunset: ", sunset)
+
+    print("=== Time to sun change ===")
 
     return time((int(hours)), (int(minutes)))
 
@@ -242,6 +262,13 @@ def ShouldYouPutYourWashingOut(weatherdata):
     timeToDry = ApplyWindToDryTime(timeToDry, weatherdata['windspeed'])
 
     timeToDry = ApplyRainToDryTime(timeToDry, weatherdata['precipitation'])
+
+    print("Time to dry:", timeToDry, "hours")
+    print("Time to change: ", weatherdata['timeToChange'].hour, "hours")
+    print("Time to Sunset:", weatherdata['timeOfSunset'], "hours")
+    print("Time to Sunrise:", weatherdata['timeOfSunrise'], "hours")
+    if (timeToDry > weatherdata['timeToChange'].hour):
+        return (False, timeToDry, "It will be night time before it dries.")
 
     print("Yes, conditions are appropriate")
     print("Time to dry:", timeToDry, "hours")
@@ -325,13 +352,33 @@ def call_ShouldIPutMyWashingOut(postcodeInput):
     weatherdata['TimeToDry'] = shouldWashingGoOut[1]
     weatherdata['reason'] = shouldWashingGoOut[2]
     weatherdata['result'] = True
+
+    # record this search
+    report.AddWeatherSearchToDatabase(weatherdata, postcodeInput, 0, 0)
+
     return weatherdata
 
 
-def call_ShouldIPutMyWashingOutLongLat(Long, Lat):
-    # TODO
+def call_ShouldIPutMyWashingOutLongLat(long, lat):
+    # TODO validate input
 
-    return False
+    weatherdata = GetWeatherFromLongLat(long, lat)
+
+    if (weatherdata == False):
+        print("Invalid long lat")
+        return {"result": False, "reason": "Longitude/Latitude not found"}
+
+    weatherdata = PrepareWeatherData(weatherdata)
+    shouldWashingGoOut = ShouldYouPutYourWashingOut(weatherdata)
+    weatherdata['WillItDry'] = shouldWashingGoOut[0]
+    weatherdata['TimeToDry'] = shouldWashingGoOut[1]
+    weatherdata['reason'] = shouldWashingGoOut[2]
+    weatherdata['result'] = True
+
+    # record this search
+    report.AddWeatherSearchToDatabase(weatherdata, 0, long, lat)
+
+    return weatherdata
 
 
 if __name__ == "__main__":

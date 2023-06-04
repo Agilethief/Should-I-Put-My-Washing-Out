@@ -93,8 +93,6 @@ var form = document.getElementById("formId");
 var formIDtoCheck = 0;
 function formBlocker(event) {
   event.preventDefault(); // Stops page reload
-  const formData = new FormData(form); // Get the data
-  formIDtoCheck = formData.get("idToCheck"); // Pull the specific data
   return false;
 }
 form.addEventListener("submit", formBlocker);
@@ -102,15 +100,44 @@ form.addEventListener("submit", formBlocker);
 function ShouldIPutMyWashingOut() {
   const formData = new FormData(form); // Get the data
   postcode = formData.get("postcode"); // Pull the specific data
-  console.log("ShouldIPutMyWashingOut() called for " + postcode);
-  CheckWeather(postcode);
+  long = formData.get("longitude");
+  lat = formData.get("lattitude");
+  console.log(
+    "ShouldIPutMyWashingOut() called for " + postcode + " " + long + " " + lat
+  );
+  CheckWeather(postcode, long, lat);
 }
 
-async function CheckWeather(postcode) {
-  //console.log("Get Wisdom example fetch: " + idToCheck);
+function GetGeoLocation() {
+  if (navigator.geolocation) {
+    loadSpinner.style.display = "block";
+    navigator.geolocation.getCurrentPosition(GeoLocationSuccess);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
 
-  const jsonData = JSON.stringify({ postcode: postcode });
-  //console.log(jsonData);
+function GeoLocationSuccess(position) {
+  console.log(
+    "Geo location is: " +
+      position.coords.latitude +
+      " " +
+      position.coords.longitude
+  );
+  CheckWeather(
+    null,
+    position.coords.longitude.toString(),
+    position.coords.latitude.toString()
+  );
+}
+
+async function CheckWeather(postcode, long, lat) {
+  if (postcode == null) postcode = "";
+  if (long == null) long = "";
+  if (lat == null) lat = "";
+
+  const jsonData = JSON.stringify({ postcode: postcode, long: long, lat: lat });
+  console.log(jsonData);
 
   const getAPI = "/CheckWeather";
   //console.log(getAPI);
