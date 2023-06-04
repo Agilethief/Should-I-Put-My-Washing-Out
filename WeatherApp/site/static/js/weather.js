@@ -65,29 +65,6 @@ var weatherInfo = {
   },
 };
 
-/*
-duration = 1;
-for (var key in weatherInfo) {
-  var value = weatherInfo[key];
-
-  var targetEl = "testBox";
-
-  if (value["include2H"] == false) {
-    InsertHTML(
-      targetEl,
-      BuildInfoCard(value["name"], value["icon"], 100, value["unit"])
-    );
-  } else {
-    InsertHTML(
-      targetEl,
-      BuildLongInfoCard(value["name"], value["icon"], 20, 3, value["unit"])
-    );
-  }
-  fadeIn(value["name"], duration);
-  duration += 0.1;
-}
-*/
-
 // For blocking form page reloads
 var form = document.getElementById("formId");
 var formIDtoCheck = 0;
@@ -137,10 +114,9 @@ async function CheckWeather(postcode, long, lat) {
   if (lat == null) lat = "";
 
   const jsonData = JSON.stringify({ postcode: postcode, long: long, lat: lat });
-  console.log(jsonData);
+  //console.log(jsonData);
 
   const getAPI = "/CheckWeather";
-  //console.log(getAPI);
   const requestOptions = {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -148,7 +124,6 @@ async function CheckWeather(postcode, long, lat) {
   };
 
   loadSpinner.style.display = "block";
-  //foundCourseElement.style.display = "none";
 
   let response = await fetch(getAPI, requestOptions);
 
