@@ -4,26 +4,31 @@ endblock %}
 
 <div class="spacer pt-6"></div>
 
-<div class="columns is-centered pt-6">
+<div class="columns is-centered">
   <div class="column is-half">
 
-    <section class="section ">
+    <section class="section pb-6">
 
-      <h1 class="title has-text-centered">
+      <h1 class="title has-text-centered is-1 has-text-danger has-text-weight-bold">
         Should you put your washing out?
       </h1>
     </section>
 
-    <section class="section" id="searchBox">
-      <div class="container">
-        <form id="formId" action="formBlocker()" method="post">
-          <div class="field pb-3">
+    <section class="section pt-0" id="searchBox">
+      <div class="container has-text-centered">
+        <form id="formId" class="pb-3">
+          <div class="field">
             <label class="label">Enter your postcode</label>
             <div class="control">
-              <input class="input has-text-centered" type="text" placeholder="postcode" name="postcode">
+              <input class="input is-large has-text-centered" type="text" placeholder="Enter your Postcode"
+                name="postcode" maxlength="10">
             </div>
           </div>
+          <div id="inputError" class="pt-0">
+            <p class="help">Error</p>
+          </div>
         </form>
+
         <div class="field">
           <div class="columns is-centered">
             <div class="column is-half has-text-centered">
@@ -34,7 +39,6 @@ endblock %}
               </div>
             </div>
           </div>
-
         </div>
 
       </div>

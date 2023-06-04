@@ -3,6 +3,22 @@ from . import weather  # import GetWeatherData
 import json
 from datetime import datetime, time, timedelta
 from zoneinfo import ZoneInfo
+# from cgi import escape
+
+
+def ValidatePostcodeInput(incomingpostcode):
+    # Check if postcode is valid
+    try:
+        int(incomingpostcode)
+    except:
+        return False
+    return True
+
+
+def ValidateLongLatInput(long, lat):
+    # Check if longlat is valid
+
+    return True
 
 
 def GetWeatherFromPostcode(postcode):
@@ -10,6 +26,11 @@ def GetWeatherFromPostcode(postcode):
     postcodeConversion.CreateDatabase()
     print("Converting postcode to long and lat...")
     longlat = postcodeConversion.PostCodeToLongLat(postcode)
+
+    print("Long Lat: ", longlat)
+    if (longlat[0] == False):
+        print("Postcode not found in database, returning false")
+        return False
 
     print("Getting weather data...")
     weatherdata = weather.GetWeatherData(longlat)
@@ -47,7 +68,7 @@ def PrepareWeatherData(weatherdata):
 
     # Wind
     windspeed = current_weather['windspeed']
-    # print("Wind prediction: ", "TODO")
+    windspeed_2h = hourly_weather['windspeed_10m'][currentHour_2h]
 
     # Sunset and rise times
     timeToChange = TimeToSunchange(weatherdata)
@@ -59,7 +80,7 @@ def PrepareWeatherData(weatherdata):
     precipitationProbability = hourly_weather['precipitation_probability'][currentHour]
     precipitationProbability_2h = hourly_weather['precipitation_probability'][currentHour_2h]
     precipitation = hourly_weather['precipitation'][currentHour]
-    precipitation_2h = hourly_weather['precipitation_probability'][currentHour_2h]
+    precipitation_2h = hourly_weather['precipitation'][currentHour_2h]
     precipitationIncreasing = precipitation_2h > precipitation
 
     # Cloud cover
@@ -85,6 +106,7 @@ def PrepareWeatherData(weatherdata):
         "tempMin": tempMin,
         "tempCooling": tempCooling,
         "windspeed": windspeed,
+        "windspeed_2h": windspeed_2h,
         "timeToChange": timeToChange,
         "timeOfSunset": timeOfSunset,
         "timeOfSunrise": timeOfSunrise,
@@ -174,10 +196,10 @@ def HardWeatherChecks(weatherdata):
         print("No, weather conditions are not appropriate:", "It is night time")
         return (False, "It is night time")
 
-    # if (weatherdata['timeToChange'] < 1):
-    #    print("No, weather conditions are not appropriate:",
-    #          "It will be night time soon")
-    #    return (False, "It will be night time soon")
+    if (weatherdata['timeToChange'].hour < 1):
+        print("No, weather conditions are not appropriate:",
+              "It will be night time soon")
+        return (False, "It will be night time soon")
 
     # High Rain reduces ability to dry.
     # if rain is over 1mm per hour return false
@@ -185,6 +207,8 @@ def HardWeatherChecks(weatherdata):
         print("No, weather conditions are not appropriate:",
               "It is raining")
         return (False, "It is raining")
+
+    return (True, "Weather is fine")
 
 
 def ShouldYouPutYourWashingOut(weatherdata):
@@ -284,14 +308,30 @@ This is a primary thing that the website will call.
 
 
 def call_ShouldIPutMyWashingOut(postcodeInput):
-    print("postcodeInput", postcodeInput)
+    # Validate and protect from the input.
+    if (ValidatePostcodeInput(postcodeInput) == False):
+        print("Invalid postcode")
+        return {"result": False, "reason": "Invalid postcode"}
+
     weatherdata = GetWeatherFromPostcode(postcodeInput)
+    # Check if we can find a postcode to work with
+    if (weatherdata == False):
+        print("Invalid postcode")
+        return {"result": False, "reason": "Postcode not found"}
+
     weatherdata = PrepareWeatherData(weatherdata)
     shouldWashingGoOut = ShouldYouPutYourWashingOut(weatherdata)
     weatherdata['WillItDry'] = shouldWashingGoOut[0]
     weatherdata['TimeToDry'] = shouldWashingGoOut[1]
     weatherdata['reason'] = shouldWashingGoOut[2]
+    weatherdata['result'] = True
     return weatherdata
+
+
+def call_ShouldIPutMyWashingOutLongLat(Long, Lat):
+    # TODO
+
+    return False
 
 
 if __name__ == "__main__":

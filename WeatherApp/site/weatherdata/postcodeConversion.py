@@ -22,6 +22,8 @@ def PostCodeToLongLat(postcode):
         lat = cur.fetchone()[0]
         print(lat)
     except:
+        long = False
+        lat = False
         print("Could not find postcode in database")
 
     conn.commit()

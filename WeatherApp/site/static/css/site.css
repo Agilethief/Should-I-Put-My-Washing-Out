@@ -15,7 +15,7 @@
   position: absolute;
   width: 80px;
   min-height: 80px;
-  top: 11em;
+  top: 1em;
   left: 45%;
   padding: 1em;
   animation-name: loadSpin;
@@ -83,19 +83,80 @@
   height: 10%;
 }
 
+.bgGrad {
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(200, 200, 200));
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%;
+  --mask: radial-gradient(3px at 50% calc(100% - 8px), #000 99%, #0000 101%)
+      calc(50% - 10px) 0/30px 100%,
+    radial-gradient(5px at 50% calc(100% + 3px), #0000 99%, #000 101%) 50%
+      calc(100% - 5px) / 20px 100% repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  z-index: -9;
+}
+
+.bgGround {
+  background-color: rgb(158, 158, 158);
+  border-top: 1.2em solid rgb(107, 107, 107);
+  background-image: linear-gradient(rgb(128, 128, 128), rgb(158, 158, 158));
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 22%;
+  z-index: -10;
+}
+
+.bgImage {
+  position: fixed;
+  /* filter: invert(80%); */
+  opacity: 25%;
+  z-index: -5;
+}
+
+.bgSun {
+  top: 5%;
+  right: 5%;
+  width: 10%;
+  max-width: 128px;
+}
+
+.bgCloud {
+  top: 9%;
+  left: 5%;
+  width: 10%;
+  max-width: 128px;
+}
+
+.bgTree {
+  bottom: 20%;
+  left: 8em;
+  width: 100%;
+  max-width: 128px;
+}
+
+.mainContent {
+  z-index: 1;
+}
+
 .footer {
   position: fixed;
   bottom: 0.25em;
   left: 0;
   width: 100%;
   height: 1em;
-  background-color: rgb(226, 226, 226) 0 4px 9px;
+  background-color: rgb(58, 58, 58) 0 4px 9px;
   box-shadow: rgba(165, 167, 166, 0.15) 0 4px 9px;
   display: flex;
   flex-direction: row;
   align-content: end;
   text-align: right;
   padding: 1.5em;
+  z-index: 10;
 }
 .footer-text {
   display: block;

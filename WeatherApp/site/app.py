@@ -30,10 +30,10 @@ def CheckWeather():
     postcode = requestData['postcode']
 
     weatherData = weatherProgram.call_ShouldIPutMyWashingOut(postcode)
-    weatherDataJson = json.dumps(weatherData, indent=4, default=str)
     print(weatherData)
-    if weatherData == False:
+    if weatherData["result"] == False:
         return {
+            "reason": weatherData['reason'],
             "pass": "failed",
         }
 
@@ -48,6 +48,7 @@ def CheckWeather():
         "tempMin":  weatherData['tempMin'],
         "tempCooling":  weatherData['tempCooling'],
         "windspeed":  weatherData['windspeed'],
+        "windspeed_2h":  weatherData['windspeed_2h'],
         "timeToChange": str(weatherData['timeToChange']),
         "timeOfSunset": str(weatherData['timeOfSunset']),
         "timeOfSunrise":  str(weatherData['timeOfSunrise']),
