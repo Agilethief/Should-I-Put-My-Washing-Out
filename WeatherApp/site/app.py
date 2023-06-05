@@ -16,22 +16,22 @@ def home():
         return render_template("postcode.html")
 
 
-@app.route("/postcode/")
+@app.route("/postcode")
 def postcodePage():
     return render_template("postcode.html")
 
 
-@app.route("/global/")
+@app.route("/global")
 def globalPage():
     return render_template("global.html")
 
 
-@app.route("/method/")
+@app.route("/method")
 def methodPage():
     return render_template("method.html")
 
 
-@app.route("/about/")
+@app.route("/about")
 def aboutPage():
     return render_template("about.html")
 
