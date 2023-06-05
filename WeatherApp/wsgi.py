@@ -1,7 +1,7 @@
-from site import app
+from .site import getApp
 
 if __name__ == "__main__":
-    app.run()
+    getApp.run()
 
 
 # $ gunicorn --bind 0.0.0.0:5000 'wsgi:create_app()'
