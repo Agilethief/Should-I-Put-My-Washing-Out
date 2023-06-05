@@ -1,4 +1,4 @@
-from .site import getApp
+from app import app as getApp
 
 if __name__ == "__main__":
     getApp.run()
