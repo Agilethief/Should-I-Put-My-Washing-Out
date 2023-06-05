@@ -62,6 +62,13 @@ def PrepareWeatherData(weatherdata):
     currentHour = currentTime.hour
     currentHour_2h = min(currentHour + 2, 23)
 
+    print("**==**==**")
+    print("**==**==**")
+    print("Current Hour: ", currentHour)
+    print("Current Hour + 2: ", currentHour_2h)
+    print("**==**==**")
+    print("**==**==**")
+
     # Unpacking JSON
     current_weather = weatherdata['current_weather']
     daily_weather = weatherdata['daily']
