@@ -1,4 +1,8 @@
 # This is a package
 # Great success
 
-from . import app
+import appStart
+
+
+def app():
+    return app.app
