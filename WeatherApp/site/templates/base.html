@@ -25,42 +25,42 @@
   </div>
 
   <div id="menu">
-    <div class="navbar-weather" role="navigation" aria-label="main navigation">
-      <div class="level">
-        <div class="level-left">
-          <div class="level-item">
-            <a href="{{url_for('postcodePage')}}" class="image is-square is-32x32">
-              <img class="" src="/static/images/WeatherIcons/FlatIcon/001-sun.png ">
-            </a>
-          </div>
-        </div>
-        <div class="level-right">
 
-          <div class="level-item">
-            <a href="/" class="button is-small is-success">
+
+    <nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <a class="navbar-link is-arrowless" href="/" class="button is-small is-success">
               Postcode
             </a>
           </div>
 
-          <div class="level-item">
-            <a href="{{url_for('globalPage')}}" class="button is-small is-success">
+          <div class="navbar-item">
+            <a class="navbar-link is-arrowless" href="{{url_for('globalPage')}}" class="button is-small is-success">
               Global
             </a>
           </div>
-          <div class="level-item">
-            <a href="{{url_for('methodPage')}}" class="button is-small is-success">
+          <div class="navbar-item">
+            <a class="navbar-link is-arrowless" href="{{url_for('methodPage')}}" class="button is-small is-success">
               Method
             </a>
           </div>
-          <div class="level-item">
-            <a href="{{url_for('aboutPage')}}" class="button is-small is-success">
+          <div class="navbar-item">
+            <a class="navbar-link is-arrowless" href="{{url_for('aboutPage')}}" class="button is-small is-success">
               About
             </a>
           </div>
         </div>
-
       </div>
-    </div>
+    </nav>
 
   </div>
 
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="level-right">
-        <div class="footer-text">Created and maintained by Timothy Bermanseder</div>
+        <div class="footer-text">Created and maintained by Timothy Bermanseder | v0.11</div>
       </div>
     </div>
   </div>
