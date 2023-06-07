@@ -4,7 +4,7 @@ from weatherdata import main as weatherProgram
 import json
 
 app = Flask(__name__)
-app.config['SERVER_NAME'] = 'weather.tbwebapp.com'
+# app.config['SERVER_NAME'] = 'weather.tbwebapp.com'
 
 
 @app.route("/", methods=["POST", "GET"])
