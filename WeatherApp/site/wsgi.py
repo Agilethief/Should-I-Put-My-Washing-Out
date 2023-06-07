@@ -1,7 +1,7 @@
-from app import app as getApp
+from app import app
 
 if __name__ == "__main__":
-    getApp.run()
+    app.run()
 
 
 # gunicorn --bind 0.0.0.0:5009 wsgi:getApp
