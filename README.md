@@ -16,10 +16,10 @@ This cute little application will allow users to use their postcode (Or long and
 
 The key technology used:
 
-- [Python]: https://www.python.org/
-- [Flask]: https://flask.palletsprojects.com/en/2.3.x/
-- [Gunicorn]: https://gunicorn.org/
-- [Open Meteo]: https://open-meteo.com/
+- [Python] https://www.python.org/
+- [Flask] https://flask.palletsprojects.com/en/2.3.x/
+- [Gunicorn] https://gunicorn.org/
+- [Open Meteo] https://open-meteo.com/
 
 This application uses Flask for the web application and gunicorn to serve.
 
