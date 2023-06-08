@@ -6,7 +6,7 @@ This cute little application will allow users to use their postcode (Or long and
 
 ## Demo:
 
-[Should I put my washing out?] weather.tbwebapp.com
+![Should I put my washing out?] (https://weather.tbwebapp.com)
 
 ## How to deploy
 
