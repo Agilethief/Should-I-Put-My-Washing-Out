@@ -1,8 +1,10 @@
-# Should I put my washing out?
+# Should I put my washing out? (WIP)
 
 ![Screenshot demonstrating the weather app](screenshots/AppScreenshot.JPG)
 
 This cute little application will allow users to use their postcode (Or long and lat for global prediction) to determine how long it will take to for their washing to dry.
+
+# NOTE: This project is still under construction and there will likely be bugs at the moment!
 
 ## Demo: [Should I put my washing out?](https://weather.tbwebapp.com)
 
